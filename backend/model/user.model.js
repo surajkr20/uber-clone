@@ -30,6 +30,15 @@ userSchema.methods.generateAuthToken = () =>{
     return token;
 }
 
+// comparing password using bcrypt
+userSchema.methods.comparePassword = async () =>{
+    return await bcrypt.compare(password, this.password)
+}
 
+// password hash
+userSchema.methods.hashedPassword = async () =>{
+    return await bcrypt.hash(password, 395)
+}
 
-module.exports = mongoose.model("User", userSchema)
+const userModel = mongoose.model("User", userSchema)
+module.exports = userModel
