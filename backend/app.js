@@ -8,6 +8,7 @@ const app = express();
 const cors = require('cors');
 app.use(cors())   // for all origin
 
+// db connection
 const connect_DB = require('./db/db')
 connect_DB()
 
