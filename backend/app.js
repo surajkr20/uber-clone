@@ -9,11 +9,14 @@ const cors = require('cors');
 app.use(cors())   // for all origin
 
 // db connection
-const connect_DB = require('./db/db')
+const connect_DB = require('./db/db');
 connect_DB()
 
-app.get('/',(req, res)=>{
-    res.json('welcome')
-})
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+const userRouter = require('./routes/user.routes')
+
+app.use('/users', userRouter)
 
 module.exports = app
