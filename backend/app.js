@@ -8,6 +8,9 @@ const app = express();
 const cors = require('cors');
 app.use(cors())   // for all origin
 
+const connect_DB = require('./db/db')
+connect_DB()
+
 app.get('/',(req, res)=>{
     res.json('welcome')
 })
