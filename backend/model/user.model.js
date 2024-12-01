@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
         },
         lastname: {
             type: String,
-            minlength: [3, 'Last name must be at least 3 characters long'],
+            minlength: [2, 'Last name must be at least 2 characters long'],
         }
     },
     email: {
@@ -45,7 +45,7 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 // Password hash
-userSchema.methods.hashedPassword = async function (password) {
+userSchema.statics.hashPassword = async function (password) {
     try {
         const saltRounds = 10; // Standard salt rounds
         return await bcrypt.hash(password, saltRounds);
