@@ -46,7 +46,6 @@ module.exports.registerUser = async (req, res, next) => {
     }
 };
 
-
 // user login functionality
 module.exports.loginUser = async (req, res, next) => {
     try {
@@ -74,6 +73,7 @@ module.exports.loginUser = async (req, res, next) => {
         const token = user.generateAuthToken();
 
         // Send response
+        res.cookie('token', token)
         res.status(200).json({ token, user });
     } catch (error) {
         // Handle unexpected errors
@@ -81,3 +81,7 @@ module.exports.loginUser = async (req, res, next) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+module.exports.getUserProfile = async (req, res, next) => {
+    res.status(200).json(req.user)
+}
