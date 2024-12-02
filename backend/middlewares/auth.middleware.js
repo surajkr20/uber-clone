@@ -4,11 +4,16 @@ const jwt = require('jsonwebtoken');
 module.exports.authUser = async (req, res, next) => {
     try {
         // Retrieve token from cookies or Authorization header
-        const token = req.cookies.token || req.headers.authorization.split(' ')[1];
+        const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
         // If no token is provided, return unauthorized response
         if (!token) {
             return res.status(401).json({ message: 'Unauthorized - Token missing' });
+        }
+
+        const isBlacklisted = await userModel.findOne({token: token})
+        if(isBlacklisted){
+            return res.status(401).json({ message: 'Unauthorized' });
         }
 
         // Verify the JWT token using the secret key
