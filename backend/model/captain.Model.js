@@ -39,22 +39,22 @@ const captainSchema = new mongoose.Schema({
   vehicle: {
     color: {
       type: String,
-      required: true,
+      // required: true,
       minlength: [2, "Color must be at least 2 characters long"],
     },
     plate: {
       type: String,
-      required: true,
+      // required: true,
       minlength: [3, "Plate must be at least 3 characters long"],
     },
     capacity: {
       type: Number,
-      required: true,
+      // required: true,
       min: [1, "Capacity must be at least 1"],
     },
     vehicleType: {
       type: String,
-      required: true,
+      // required: true,
       enum: ["car", "motorcycle", "auto"],
     },
   },
