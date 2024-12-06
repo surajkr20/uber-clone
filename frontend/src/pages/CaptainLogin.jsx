@@ -27,8 +27,8 @@ const CaptainLogin = () => {
     <div className="p-6 h-screen flex flex-col justify-between">
       <div className="flex flex-col gap-4">
         <img
-          className="w-[10rem]"
-          src="https://static.vecteezy.com/system/resources/previews/027/127/451/non_2x/uber-logo-uber-icon-transparent-free-png.png"
+          className="w-[10rem] relative left-[-8vw]"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMwyFRO5u7QIXet8IQWT-kesmK8HQdbmzyG6wRbk-FxjiyCrKwow9PKCzFgAi9PwCmBQs&usqp=CAU"
           alt=""
         />
         <form
