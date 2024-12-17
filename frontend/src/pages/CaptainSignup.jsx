@@ -1,70 +1,59 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { UserDataContext } from "../context/UserContext";
+import React from 'react'
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const UserSignup = () => {
+const CaptainSignup = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [captainSignupData, setCaptainSignupData] = useState({});
+  const [ firstName, setFirstName ] = useState('')
+  const [ lastName, setLastName ] = useState('')
 
-  const navigate = useNavigate();
-
-  const { user, setUser } = useContext(UserDataContext); // Access setUser
-
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-  
-    try {
-      const newUser = {
-        fullname: {
-          firstname: firstName,
-          lastname: lastName,
-        },
-        email: email,
-        password: password,
-      };
-  
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/register`,
-        newUser
-      );
-  
-      if (response.status === 201) {
-        const data = response.data;
-        setUser(data.user); // Update user context
-        navigate('/home');
-      }
-  
-      // Clear form fields
-      setEmail("");
-      setFirstName("");
-      setLastName("");
-      setPassword("");
-    } catch (error) {
-      console.error("Error signing up user:", error.message);
-    }
+    console.log(email, password);
+
+    // store the data's in object
+    setCaptainSignupData({
+      fullName:{
+        firstName: firstName,
+        lastName: lastName
+      },
+      email: email,
+      password: password,
+    });
+
+    // for clear form
+    setFirstName(""),
+    setLastName(""),
+    setEmail("");
+    setPassword("");
   };
-  
 
   return (
     <div className="p-6 h-screen flex flex-col justify-between">
       <div className="flex flex-col gap-4">
         <img
-          className="w-[7rem] relative"
-          src="https://download.logo.wine/logo/Uber/Uber-Logo.wine.png"
+          className="w-[8rem] relative left-[-8vw]"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMwyFRO5u7QIXet8IQWT-kesmK8HQdbmzyG6wRbk-FxjiyCrKwow9PKCzFgAi9PwCmBQs&usqp=CAU"
           alt=""
         />
-        <form onSubmit={submitHandler}>
+        <form
+          onSubmit={(e) => {
+            submitHandler(e);
+          }}
+        >
           <h3 className="font-serif text-base font-sm mb-2">
             What&apos;s your Name
           </h3>
           <div className="flex gap-4">
             <input
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => {
+                submitHandler(e);
+              }}
               type="text"
               required
               placeholder="First Name"
@@ -72,7 +61,9 @@ const UserSignup = () => {
             />
             <input
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => {
+                submitHandler(e);
+              }}
               type="text"
               required
               placeholder="Last Name"
@@ -84,7 +75,9 @@ const UserSignup = () => {
           </h3>
           <input
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             type="email"
             required
             placeholder="email@example.com"
@@ -95,20 +88,21 @@ const UserSignup = () => {
           </h3>
           <input
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             type="password"
             required
             placeholder="Enter a strong password"
             className="bg-[#eeeeee] w-full px-4 py-2 border-2 placeholder:text-sm mb-7"
           />
-          <button className="bg-[#111] text-white font-bold text-lg w-full px-4 py-3 placeholder:text-xl"
-          type="submit">
-            Create an account as User
+          <button className="bg-[#111] text-white font-bold text-lg w-full px-4 py-3 placeholder:text-xl">
+            Create an account as Captain
           </button>
         </form>
         <p className="text-center">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600">
+          <Link to="/captain-login" className="text-blue-600">
             login here
           </Link>
         </p>
@@ -119,15 +113,7 @@ const UserSignup = () => {
         <span className="underline">Terms of Service apply</span>.
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default UserSignup;
-
-
-// onClick={()=>{
-//   if (!firstName || !email || !password) {
-//     alert("Please fill in all fields before submitting!");
-//     return; // Stop execution
-//   }else navigate('/home')
-// }}
+export default CaptainSignup
