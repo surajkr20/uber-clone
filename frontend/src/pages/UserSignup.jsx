@@ -35,6 +35,7 @@ const UserSignup = () => {
       if (response.status === 201) {
         const data = response.data;
         setUser(data.user); // Update user context
+        localStorage.setItem('token',data.token); // home route protected
         navigate('/home');
       }
   
@@ -48,7 +49,6 @@ const UserSignup = () => {
     }
   };
   
-
   return (
     <div className="p-6 h-screen flex flex-col justify-between">
       <div className="flex flex-col gap-4">

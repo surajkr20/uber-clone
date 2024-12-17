@@ -8,7 +8,6 @@ import axios from 'axios'
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [userData, setUserData] = useState({});
 
   const { user, setUser } = useContext(UserDataContext);
   const navigate = useNavigate();
@@ -25,10 +24,11 @@ const UserLogin = () => {
       `${import.meta.env.VITE_BASE_URL}/users/login`,
       userData
     );
-
+  
     if (response.status === 200) {
       const data = response.data;
       setUser(data.user); // Update user context
+      localStorage.setItem('token',data.token); // home route protected
       navigate('/home');
     }
 
