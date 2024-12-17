@@ -24,4 +24,4 @@ const captainRouter = require('./routes/captain.routes')
 app.use('/users', userRouter)
 app.use('/captains', captainRouter)
 
-module.exports = app
+module.exports = app;
