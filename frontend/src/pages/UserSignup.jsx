@@ -103,7 +103,7 @@ const UserSignup = () => {
           />
           <button className="bg-[#111] text-white font-bold text-lg w-full px-4 py-3 placeholder:text-xl"
           type="submit">
-            Create an account as User
+            Register User
           </button>
         </form>
         <p className="text-center">
