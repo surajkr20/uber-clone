@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+ 
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
