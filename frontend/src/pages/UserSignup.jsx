@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+ 
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -123,11 +124,3 @@ const UserSignup = () => {
 };
 
 export default UserSignup;
-
-
-// onClick={()=>{
-//   if (!firstName || !email || !password) {
-//     alert("Please fill in all fields before submitting!");
-//     return; // Stop execution
-//   }else navigate('/home')
-// }}
