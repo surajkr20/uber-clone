@@ -4,6 +4,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
+import LocationSearchPanel from "../components/LocationSearchPanel";
+import VehiclePanel from '../components/VehiclePanel'
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -11,6 +13,8 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
+  const vehiclePanelRef = useRef(null);
+  const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -20,22 +24,37 @@ const Home = () => {
     if (panelOpen == true) {
       gsap.to(panelRef.current, {
         height: "70%",
+        padding: 24,
       });
       gsap.to(panelCloseRef.current, {
-        opacity: 1
+        opacity: 1,
       });
     } else {
       gsap.to(panelRef.current, {
         height: "0%",
+        padding: 0,
       });
       gsap.to(panelCloseRef.current, {
-        opacity: 0
+        opacity: 0,
       });
     }
   }, [panelOpen]);
 
+  // vehical panel
+  useEffect(() => {
+    if (vehiclePanelOpen) {
+      gsap.to(vehiclePanelRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(vehiclePanelRef.current, {
+        transform: 'translateY(100%)'
+      });
+    }
+  }, [vehiclePanelOpen]);
+
   return (
-    <div className="h-screen relative">
+    <div className="h-screen relative overflow-hidden">
       <img
         src="https://download.logo.wine/logo/Uber/Uber-Logo.wine.png"
         alt="uber/logo"
@@ -52,9 +71,13 @@ const Home = () => {
 
       <div className="flex flex-col justify-end h-screen absolute w-full top-0">
         <div className="h-[30%] p-6 bg-white relative">
-          <h5 className="absolute right-6 top-6 text-2xl opacity-0" ref={panelCloseRef} onClick={()=>{
-            setPanelOpen(false)
-          }}>
+          <h5
+            className="absolute right-6 top-6 text-2xl opacity-0"
+            ref={panelCloseRef}
+            onClick={() => {
+              setPanelOpen(false);
+            }}
+          >
             <i class="ri-arrow-down-wide-line"></i>
           </h5>
           <h4 className="text-2xl font-semibold">Find a trip</h4>
@@ -91,7 +114,19 @@ const Home = () => {
           </form>
         </div>
 
-        <div className="h-0 bg-red-500 transition-all" ref={panelRef}></div>
+        <div className="h-0 bg-white" ref={panelRef}>
+          <LocationSearchPanel
+            setPanelOpen={setPanelOpen}
+            setVehiclePanelOpen={setVehiclePanelOpen}
+          />
+        </div>
+      </div>
+
+      <div
+        ref={vehiclePanelRef}
+        className="fixed z-10 bottom-0 p-3 bg-white w-full px-3 py-8 translate-y-full"
+      >
+        <VehiclePanel setVehiclePanelOpen={setVehiclePanelOpen}/>
       </div>
     </div>
   );
