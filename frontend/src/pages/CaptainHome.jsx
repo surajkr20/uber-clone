@@ -1,10 +1,42 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import CaptainDetails from "../components/CaptainDetails";
 import RidePopUp from "../components/RidePopUp";
+import gsap from "gsap";
+import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 
 const CaptainHome = () => {
+  const [ridePopupPanel, setRidePopupPanel] = useState(true);
+  const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
+
+  const ridePopupPanelRef = useRef(null);
+  const confirmRidePopupPanelRef = useRef(null);
+
+  useEffect(() => {
+    if (ridePopupPanel) {
+      gsap.to(ridePopupPanelRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(ridePopupPanelRef.current, {
+        transform: 'translateY(100%)'
+      });
+    }
+  }, [ridePopupPanel]);
+
+  useEffect(() => {
+    if (confirmRidePopupPanel) {
+      gsap.to(confirmRidePopupPanelRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(confirmRidePopupPanelRef.current, {
+        transform: 'translateY(100%)'
+      });
+    }
+  }, [confirmRidePopupPanel]);
+
   return (
     <div className="h-screen">
       <div className="fixed p-3 top-0 flex items-center justify-between w-full">
@@ -35,9 +67,17 @@ const CaptainHome = () => {
       </div>
 
       <div
+        ref={ridePopupPanelRef}
         className="fixed z-10 bottom-0 p-3 bg-white w-full px-3 py-8 translate-y-full"
       >
-        <RidePopUp/>
+        <RidePopUp setRidePopupPanel={setRidePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel}/>
+      </div>
+
+      <div
+        ref={confirmRidePopupPanelRef}
+        className="fixed z-10 bottom-0 p-3 bg-white w-full h-screen px-3 py-8 translate-y-full"
+      >
+        <ConfirmRidePopUp setConfirmRidePopupPanel={setConfirmRidePopupPanel} setRidePopupPanel={setRidePopupPanel}/>
       </div>
     </div>
   );

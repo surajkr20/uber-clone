@@ -1,22 +1,13 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { Link } from "react-router-dom";
 
-const RidePopUp = (props) => {
+const FinishRide = (props) => {
   return (
     <div>
-      <h5
-        onClick={() => {
-          props.setRidePopupPanel(false);
-        }}
-        className="text-3xl mb-2 text-center mr-2"
-      >
-        <i className="ri-arrow-down-wide-fill"></i>
-      </h5>
+      <h3 className="text-2xl font-semibold">Finish This Ride!</h3>
 
-      <h3 className="text-2xl font-semibold">New Ride Available!</h3>
-
-      <div className="flex items-center justify-between mt-3 rounded-lg bg-gray-100 p-2 mb-1">
+      <div className="flex items-center justify-between mt-3 rounded-lg border-2 border-b-green-600 shadow-lg p-3 mb-1">
         <div className="flex items-center justify-center gap-3">
           <img
             src="https://img.freepik.com/free-photo/young-adult-man-wearing-hoodie-beanie_23-2149393636.jpg"
@@ -64,28 +55,18 @@ const RidePopUp = (props) => {
           </div>
         </div>
 
-        <div className="w-full flex items-center justify-between gap-6">
-          <button
-            onClick={() => {
-              props.setConfirmRidePopupPanel(true);
-            }}
-            className="w-1/2 bg-green-600 text-white font-semibold p-2 rounded-lg"
+        <div className="w-full flex flex-col items-center justify-center gap-2">
+          <Link
+            to={"/captain-home"}
+            className="w-full bg-green-600 text-white font-semibold p-3 rounded-lg text-center"
           >
-            Accept
-          </button>
-
-          <button
-            onClick={() => {
-              props.setRidePopupPanel(false);
-            }}
-            className="w-1/2 bg-gray-500 text-gray-100 font-semibold p-2 rounded-lg"
-          >
-            Ignore
-          </button>
+            Finish Ride
+          </Link>
+          <p className="p-3 text-left font-serif text-red-500">Click on finish ride if you have Completed the payment</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default RidePopUp;
+export default FinishRide;
