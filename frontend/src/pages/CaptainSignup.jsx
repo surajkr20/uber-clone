@@ -11,7 +11,7 @@ const CaptainSignup = () => {
   // State hooks for handling form data
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState(""); 
-  const [captainSignupData, setCaptainSignupData] = useState({});
+  // const [captainSignupData, setCaptainSignupData] = useState({});
   const [firstName, setFirstName] = useState(''); 
   const [lastName, setLastName] = useState('');
 
@@ -56,6 +56,8 @@ const CaptainSignup = () => {
       },
     };
 
+    console.log(captainData.vehicle)
+
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/captains/register`,
       captainData
@@ -70,7 +72,6 @@ const CaptainSignup = () => {
 
     resetForm(); // Clears the form fields
   };
-
 
   return (
     <div className="p-6 h-screen flex flex-col justify-between">
@@ -210,7 +211,7 @@ const CaptainSignup = () => {
         </p>
       </div>
       {/* Footer information */}
-      <p className="text-[10px] leading-tight">
+      <p className="text-[10px] leading-tight mt-4">
         This site is protected by reCAPTCHA and the{' '}
         <span className="underline">Google Privacy Policy</span> and{' '}
         <span className="underline"></span>
