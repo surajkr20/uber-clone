@@ -21,9 +21,11 @@ app.use(cookieParser())
 const userRouter = require('./routes/user.routes')
 const captainRouter = require('./routes/captain.routes')
 const mapsRoutes = require('./routes/maps.routes.js')
+const rideRoutes = require('./routes/ride.routes.js')
 
-app.use('/users', userRouter)
-app.use('/captains', captainRouter)
-app.use('/maps', mapsRoutes)
+app.use('/users', userRouter);
+app.use('/captains', captainRouter);
+app.use('/maps', mapsRoutes);
+app.use('/rides', rideRoutes);
 
 module.exports = app;
