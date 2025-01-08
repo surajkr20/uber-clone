@@ -1,7 +1,7 @@
 const rideModel = require("../model/ride.model");
 const mapService = require("./maps.services");
-const bcrypt = require('bcrypt');
-const crypto = require('crypto');
+// const bcrypt = require('bcrypt');
+const crypto = require("crypto");
 
 async function getFare(pickup, destination) {
   if (!pickup || !destination) {
@@ -29,28 +29,32 @@ async function getFare(pickup, destination) {
   };
 
   const fare = {
-    auto:
+    auto: Math.round(
       baseFare.auto +
-      (distanceTime.distance.value / 1000) * perKmRate.auto +
-      (distanceTime.duration.value / 60) * perMinuteRate.auto,
-
-    car:
+        (distanceTime.distance.value / 1000) * perKmRate.auto +
+        (distanceTime.duration.value / 60) * perMinuteRate.auto
+    ),
+    car: Math.round(
       baseFare.car +
-      (distanceTime.distance.value / 1000) * perKmRate.car +
-      (distanceTime.duration.value / 60) * perMinuteRate.car,
-
-    motorcycle:
+        (distanceTime.distance.value / 1000) * perKmRate.car +
+        (distanceTime.duration.value / 60) * perMinuteRate.car
+    ),
+    motorcycle: Math.round(
       baseFare.motorcycle +
-      (distanceTime.distance.value / 1000) * perKmRate.motorcycle +
-      (distanceTime.duration.value / 60) * perMinuteRate.motorcycle,
+        (distanceTime.distance.value / 1000) * perKmRate.motorcycle +
+        (distanceTime.duration.value / 60) * perMinuteRate.motorcycle
+    ),
   };
 
   return fare;
 }
+module.exports.getFare = getFare;
 
-function getOtp(num){
-  function generateOtp(num){
-    const otp = crypto.randomInt(Math.pow(10, num-1), Math.pow(10, num)).toString();
+function getOtp(num) {
+  function generateOtp(num) {
+    const otp = crypto
+      .randomInt(Math.pow(10, num - 1), Math.pow(10, num))
+      .toString();
     return otp;
   }
   return generateOtp(num);

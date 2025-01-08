@@ -9,6 +9,7 @@ const VehiclePanel = (props) => {
           <h2 className="text-2xl font-semibold mb-2">Choose your Vehicle</h2>
           <h5 onClick={()=>{
             props.setVehiclePanelOpen(false)
+            props.setPanelOpen(true)
           }} className="text-3xl font-semibold mb-2">
             <i className="ri-arrow-down-wide-fill"></i>
           </h5>
@@ -30,10 +31,10 @@ const VehiclePanel = (props) => {
               </span>
             </h4>
             <h5 className="font-medium text-sm">2 mins, Away</h5>
-            <p className="font-medium text-xs">Affordable, compact rides</p>
+            <p className="font-medium text-xs">Affordable, car rides</p>
           </div>
           <h2 className="text-xl font-semibold">
-            <i className="ri-money-rupee-circle-line"></i>192.20
+            <i className="ri-money-rupee-circle-line"></i>{props.fare.car}
           </h2>
         </div>
 
@@ -56,7 +57,7 @@ const VehiclePanel = (props) => {
             <p className="font-medium text-xs">Affordable, MotorCycle rides</p>
           </div>
           <h2 className="text-xl font-semibold">
-            <i className="ri-money-rupee-circle-line"></i>65
+            <i className="ri-money-rupee-circle-line"></i>{props.fare.motorcycle}
           </h2>
         </div>
 
@@ -70,7 +71,7 @@ const VehiclePanel = (props) => {
           />
           <div className="w-1/2 ml-2">
             <h4 className="font-medium text-xl">
-              Moto{" "}
+              Auto{" "}
               <span>
                 <i className="ri-user-3-fill"></i>1
               </span>
@@ -79,7 +80,7 @@ const VehiclePanel = (props) => {
             <p className="font-medium text-xs">Affordable, Auto rides</p>
           </div>
           <h2 className="text-xl font-semibold">
-            <i className="ri-money-rupee-circle-line"></i>118.50
+            <i className="ri-money-rupee-circle-line"></i>{props.fare.auto}
           </h2>
         </div>
     </div>
