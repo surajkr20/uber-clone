@@ -46,6 +46,8 @@ async function getFare(pickup, destination) {
     ),
   };
 
+  console.log(fare)
+
   return fare;
 }
 module.exports.getFare = getFare;
