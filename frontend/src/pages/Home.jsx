@@ -22,6 +22,7 @@ const Home = () => {
   const [pickupSuggestions, setPickupSuggestions] = useState([]);
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
+  const [vehicleType, setVehicleType] = useState(null);
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
@@ -161,6 +162,50 @@ const Home = () => {
     setFare(response.data);
   }
 
+  async function createRide() {
+    try {
+      // Validate required inputs
+      if (!pickup || !destination || !vehicleType) {
+        console.error("Missing required fields: pickup, destination, or vehicalType");
+        return;
+      }
+  
+      // Get the token from localStorage
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("User is not authenticated. Token is missing.");
+        return;
+      }
+  
+      // Make the POST request
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/rides/create`,
+        {
+          pickup,
+          destination,
+          vehicleType,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Log the response
+      console.log("Ride created successfully:", response.data);
+      return response.data; // Return the data for further use
+    } catch (error) {
+      // Handle errors
+      if (error.response) {
+        console.error("Error response from server:", error.response.data);
+      } else if (error.request) {
+        console.error("No response received from server:", error.request);
+      } else {
+        console.error("Error setting up request:", error.message);
+      }
+    }
+  }  
+
   return (
     <div className="h-screen relative overflow-hidden">
       <img
@@ -248,6 +293,7 @@ const Home = () => {
       >
         <VehiclePanel
           fare={fare}
+          selectVehicle={setVehicleType}
           setVehiclePanelOpen={setVehiclePanelOpen}
           setConfirmRidePanel={setConfirmRidePanel}
           setPanelOpen={setPanelOpen}
@@ -259,6 +305,11 @@ const Home = () => {
         className="fixed z-10 bottom-0 p-3 bg-white w-full px-3 py-8 translate-y-full"
       >
         <ConfirmRide
+          createRide={createRide}
+          pickup={pickup}
+          destination={destination}
+          fare={fare}
+          vehicalType={vehicleType}
           setConfirmRidePanel={setConfirmRidePanel}
           setVehicalFound={setVehicalFound}
         />
@@ -272,6 +323,11 @@ const Home = () => {
           setVehicalFound={setVehicalFound}
           setConfirmRidePanel={setConfirmRidePanel}
           setWaitingForDriver={setWaitingForDriver}
+          createRide={createRide}
+          pickup={pickup}
+          destination={destination}
+          fare={fare}
+          vehicalType={vehicleType}
         />
       </div>
 

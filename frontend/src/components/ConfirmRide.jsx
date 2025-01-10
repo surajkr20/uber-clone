@@ -3,6 +3,7 @@
 import React from "react";
 
 const ConfirmRide = (props) => {
+
   return (
     <div>
       <h5
@@ -28,7 +29,7 @@ const ConfirmRide = (props) => {
             <i className="ri-map-pin-line"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">Sampatchak, patna, Bihar</p>
+              <p className="text-sm -mt-1 text-gray-600">{props.pickup}</p>
             </div>
           </div>
 
@@ -36,7 +37,7 @@ const ConfirmRide = (props) => {
             <i className="ri-rectangle-fill"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">Sampatchak, patna, Bihar</p>
+              <p className="text-sm -mt-1 text-gray-600">{props.destination}</p>
             </div>
           </div>
 
@@ -45,7 +46,7 @@ const ConfirmRide = (props) => {
             <div>
               <h3 className="text-lg font-medium">
                 <i className="ri-money-rupee-circle-fill"></i>
-                198.5
+                {props.fare[ props.vehicleType ]}
               </h3>
               <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
             </div>
@@ -54,7 +55,8 @@ const ConfirmRide = (props) => {
         </div>
 
         <button onClick={()=>{
-          props.setVehicalFound(true)
+          props.createRide();
+          props.setVehicalFound(true);
           props.setConfirmRidePanel(false);
         }} className="w-full bg-green-600 text-white font-semibold p-2 rounded-lg">Confirm</button>
       </div>
