@@ -16,7 +16,6 @@ const CaptainLogin = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(email, password);
 
     // store the data's in object
     const loginCaptainData = {
