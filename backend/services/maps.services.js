@@ -58,9 +58,10 @@ module.exports.getAutoCompleteSuggestions = async (input) => {
   }
 
   const apiKey = process.env.GOOGLEMAP_API_KEY;
-  const url = `https://maps.gomaps.pro/maps/api/place/autocomplete/json?input=<string>&key=${encodeURIComponent(
+  const url = `https://maps.gomaps.pro/maps/api/place/autocomplete/json?input=${encodeURIComponent(
     input
-  )}&key=${apiKey}}`;
+  )}&region=in&key=${apiKey}`;
+  
 
   try {
     const response = await axios.get(url);

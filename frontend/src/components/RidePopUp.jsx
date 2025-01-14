@@ -23,7 +23,9 @@ const RidePopUp = (props) => {
             alt=""
             className="w-14 h-14 rounded-full object-cover"
           />
-          <h2 className="font-serif font-medium text-xl">Abhinav Suraj</h2>
+          <h2 className="font-serif font-medium text-xl">
+            {props.ride?.user.fullname.firstname + " " + props.ride?.user.fullname.lastname}
+          </h2>
         </div>
         <h4 className="text-lg font-semibold">2.2KM</h4>
       </div>
@@ -37,7 +39,7 @@ const RidePopUp = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Sampatchak, patna, Bihar
+                {props.ride?.pickup}
               </p>
             </div>
           </div>
@@ -47,7 +49,7 @@ const RidePopUp = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Sampatchak, patna, Bihar
+                {props.ride?.destination}
               </p>
             </div>
           </div>
@@ -57,7 +59,7 @@ const RidePopUp = (props) => {
             <div>
               <h3 className="text-lg font-medium">
                 <i className="ri-money-rupee-circle-fill"></i>
-                198.5
+                {props.ride?.fare}
               </h3>
               <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
             </div>
@@ -68,6 +70,7 @@ const RidePopUp = (props) => {
           <button
             onClick={() => {
               props.setConfirmRidePopupPanel(true);
+              props.confirmRide()
             }}
             className="w-1/2 bg-green-600 text-white font-semibold p-2 rounded-lg"
           >

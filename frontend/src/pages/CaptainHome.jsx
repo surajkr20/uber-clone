@@ -8,10 +8,12 @@ import gsap from "gsap";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
 import { CaptainDataContext } from "../context/CaptainContext";
+import axios from "axios";
 
 const CaptainHome = () => {
-  const [ridePopupPanel, setRidePopupPanel] = useState(true);
+  const [ridePopupPanel, setRidePopupPanel] = useState(false);
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
+  const [ride, setRide] = useState(null);
 
   const ridePopupPanelRef = useRef(null);
   const confirmRidePopupPanelRef = useRef(null);
@@ -41,11 +43,21 @@ const CaptainHome = () => {
 
     const locationInterval = setInterval(updateLocation, 10000);
     updateLocation();
-  },[]);
+  }, []);
 
-  socket.on('new-ride', (data) =>{
-    console.log(data)
-  })
+  socket.on("new-ride", (data) => {
+    setRide(data);
+    setRidePopupPanel(true);
+  });
+
+  async function confirmRide(){
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`,{
+
+    })
+
+    setRidePopupPanel(false)
+    setConfirmRidePopupPanel(true)
+  }
 
   useEffect(() => {
     if (ridePopupPanel) {
@@ -105,7 +117,7 @@ const CaptainHome = () => {
 
       {/* captain information */}
       <div className="h-2/5">
-        <CaptainDetails />
+        <CaptainDetails ride={ride}/>
       </div>
 
       <div
@@ -113,8 +125,10 @@ const CaptainHome = () => {
         className="fixed z-10 bottom-0 p-3 bg-white w-full px-3 py-8 translate-y-full"
       >
         <RidePopUp
+          ride={ride}
           setRidePopupPanel={setRidePopupPanel}
           setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+          confirmRide={confirmRide}
         />
       </div>
 
