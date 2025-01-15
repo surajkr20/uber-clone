@@ -25,7 +25,7 @@ const Home = () => {
   const [pickupSuggestions, setPickupSuggestions] = useState([]);
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
-  const [vehicleType, setVehicleType] = useState(null);
+  const [vehicleType, setVehicleType] = useState("");
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
@@ -42,6 +42,7 @@ const Home = () => {
   }, [user])
 
   socket.on('ride-confirmed', ride => {
+    setVehicalFound(false)
     setWaitingForDriver(true)
   })
 

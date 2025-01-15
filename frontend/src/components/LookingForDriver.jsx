@@ -3,6 +3,7 @@
 import React from 'react'
 
 const LookingForDriver = (props) => {
+
   return (
     <div>
       <h5
@@ -51,10 +52,6 @@ const LookingForDriver = (props) => {
               <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
             </div>
           </div>
-
-          {/* <button onClick={()=>{
-            props.setWaitingForDriver(true)
-          }} className="w-full bg-green-600 text-white font-semibold p-2 rounded-lg">Confirm</button> */}
 
         </div>
       </div>

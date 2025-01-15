@@ -14,6 +14,12 @@ const CaptainContext = ({ children }) => {
     setCaptain(captainData);
   };
 
+  const resetCaptain = () => {
+    setCaptain(null);
+    setIsLoading(false);
+    setError(null);
+  };
+
   const value = {
     captain,
     setCaptain,
@@ -22,6 +28,7 @@ const CaptainContext = ({ children }) => {
     error,
     setError,
     updateCaptain,
+    resetCaptain,
   };
 
   return (

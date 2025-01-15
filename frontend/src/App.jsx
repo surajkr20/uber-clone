@@ -6,7 +6,7 @@ import UserLogin from './pages/UserLogin'
 import UserSignup from './pages/UserSignup'
 import CaptainLogin from './pages/CaptainLogin'
 import CaptainSignup from './pages/CaptainSignup'
-import { UserDataContext } from './context/UserContext'
+// import { UserDataContext } from './context/UserContext'
 import Home from './pages/Home'
 import UserProtectWrapper from './pages/UserProtectWrapper'
 import UserLogout from './pages/UserLogout'
@@ -16,10 +16,6 @@ import Riding from './pages/Riding'
 import CaptainRiding from './pages/CaptainRiding'
 
 const App = () => {
-
-  // this is the way of receiving any time of data using context
-  const data = useContext(UserDataContext);
-  // console.log(data);
 
   return (
     <div>

@@ -23,7 +23,7 @@ const CaptainHome = () => {
 
   useEffect(() => {
     socket.emit("join", {
-      userId: captain._id,
+      userId: captain?._id,
       userType: "captain",
     });
 
@@ -31,7 +31,7 @@ const CaptainHome = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           socket.emit("update-location-captain", {
-            userId: captain._id,
+            userId: captain?._id,
             location: {
               ltd: position.coords.latitude,
               lng: position.coords.longitude,
@@ -50,13 +50,22 @@ const CaptainHome = () => {
     setRidePopupPanel(true);
   });
 
-  async function confirmRide(){
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`,{
+  async function confirmRide() {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/rides/confirm`,
+      {
+        rideId: ride._id,
+        captainId: captain._id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
 
-    })
-
-    setRidePopupPanel(false)
-    setConfirmRidePopupPanel(true)
+    setRidePopupPanel(false);
+    setConfirmRidePopupPanel(true);
   }
 
   useEffect(() => {
@@ -117,7 +126,7 @@ const CaptainHome = () => {
 
       {/* captain information */}
       <div className="h-2/5">
-        <CaptainDetails ride={ride}/>
+        <CaptainDetails ride={ride} />
       </div>
 
       <div

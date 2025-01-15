@@ -5,6 +5,7 @@ import {CaptainDataContext} from '../context/CaptainContext';
 const CaptainDetails = () => {
 
   const {captain} = useContext(CaptainDataContext);
+  console.log(captain)
 
   return (
     <div className="p-4 flex flex-col gap-3">
@@ -15,7 +16,7 @@ const CaptainDetails = () => {
             src="https://img.freepik.com/free-photo/young-adult-man-wearing-hoodie-beanie_23-2149393636.jpg"
             alt=""
           />
-          <h2 className="text-lg font-medium">{captain.fullname.firstname+" "+captain.fullname.lastname}</h2>
+          <h2 className="text-lg font-medium">{captain?.fullname.firstname+" "+captain?.fullname.lastname}</h2>
         </div>
         <div>
           <h4 className="text-lg font-semibold">
