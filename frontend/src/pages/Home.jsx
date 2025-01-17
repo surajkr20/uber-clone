@@ -26,6 +26,7 @@ const Home = () => {
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState("");
+  const [ride, setRide] = useState(null);
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
@@ -44,6 +45,7 @@ const Home = () => {
   socket.on('ride-confirmed', ride => {
     setVehicalFound(false)
     setWaitingForDriver(true)
+    setRide(ride);
   })
 
   const handlePickupChange = async (e) => {
@@ -351,7 +353,12 @@ const Home = () => {
         ref={WaitingForDriverRef}
         className="fixed z-10 bottom-0 p-3 bg-white w-full px-3 py-8 translate-y-full"
       >
-        <WaitingForDriver setWaitingForDriver={setWaitingForDriver} />
+        <WaitingForDriver 
+        ride={ride}
+        setVehicalFound={setVehicalFound}
+        setWaitingForDriver={setWaitingForDriver}
+        WaitingForDriver={WaitingForDriver}
+        />
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import {CaptainDataContext} from '../context/CaptainContext';
 const CaptainDetails = () => {
 
   const {captain} = useContext(CaptainDataContext);
-  console.log(captain)
 
   return (
     <div className="p-4 flex flex-col gap-3">
